@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://syuuylvf5ga0"]
+
+[ext_resource type="Script" path="res://game.gd" id="1_lsduh"]
+[ext_resource type="PackedScene" uid="uid://664uswwpi5rc" path="res://ball.tscn" id="2_ashlp"]
+[ext_resource type="Texture2D" uid="uid://dnkav3q6ehic8" path="res://paddle.svg" id="3_lg0ai"]
+[ext_resource type="Texture2D" uid="uid://ck83t4ew0dm2f" path="res://background.svg" id="4_n71bh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x4tcy"]
+size = Vector2(100, 20)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_lsduh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_n71bh")
+offset = Vector2(400, 400)
+
+[node name="Ball" parent="." instance=ExtResource("2_ashlp")]
+
+[node name="PaddlePivot" type="Node2D" parent="."]
+position = Vector2(400, 400)
+
+[node name="Paddle" type="StaticBody2D" parent="PaddlePivot"]
+position = Vector2(0, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PaddlePivot/Paddle"]
+shape = SubResource("RectangleShape2D_x4tcy")
+
+[node name="Sprite2D" type="Sprite2D" parent="PaddlePivot/Paddle"]
+texture = ExtResource("3_lg0ai")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 109.0
+offset_bottom = 65.0
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Connect AI"
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+
+[connection signal="toggled" from="CanvasLayer/HBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
