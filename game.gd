@@ -3,7 +3,7 @@ extends Node2D
 var Ball = preload("res://ball.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Ball.linear_velocity = Vector2(0, 5).normalized()*200
+	$Ball.linear_velocity = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized()*200
 
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
@@ -31,7 +31,7 @@ func add_new_ball():
 	var ball = Ball.instantiate()
 	add_child(ball)
 	ball.position = Vector2(400, 400)
-	ball.linear_velocity = Vector2(0, 5).normalized()*200
+	ball.linear_velocity = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized()*200
 	ball.name = "Ball"
 	
 
